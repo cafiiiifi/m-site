@@ -26,6 +26,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
+      min-height: 600px; /* 모바일에서 너무 찌그러지는 것 방지 */
       background: linear-gradient(180deg, #0b1d3a 0%, #1a3c6d 100%);
       overflow: hidden;
     }
@@ -94,7 +95,7 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* 개별 오브젝트 */
+    /* 개별 오브젝트 (PC 기본) */
     .item {
       position: absolute;
       z-index: 3;
@@ -107,7 +108,7 @@
 
     .item-tree {
       left: 2%;
-      bottom: 15%;
+      bottom: 12%;
       width: 380px;
       height: auto;
       transform-origin: bottom center;
@@ -263,9 +264,7 @@
       letter-spacing: 5px;
     }
 
-    /* ------------------------------------------
-       QR 코드 중앙 정렬 & 클릭 이동 스타일
-       ------------------------------------------ */
+    /* QR 코드 중앙 정렬 & 클릭 이동 스타일 */
     .qr-section {
       display: flex;
       flex-direction: column;
@@ -392,23 +391,76 @@
       letter-spacing: -1px;
     }
 
-    /* 모바일 반응형 */
+    /* ==========================================
+       [핵심 수정] 모바일 반응형 완벽 보정
+       ========================================== */
     @media (max-width: 768px) {
-      .item-moon { width: 60px; height: 60px; }
-      .cards-container { flex-direction: column; gap: 60px; margin-top: 50px; }
-      .card { width: 100%; max-width: 340px; min-height: 320px; }
-      
-      .item-tree { width: 250px; bottom: 18%; }
-      .item-swing { width: 200px; right: 5%; height: 70%; }
-      .item-character { width: 160px; right: 6%; bottom: 25%; }
-      .item-bag { width: 60px; right: 20%; bottom: 38%; }
-      .item-lantern { width: 50px; left: 10%; top: 40%; }
-      .cloud-layer { height: 20%; }
+      .hero-section {
+        height: 80vh; /* 모바일에서 밤하늘 비율을 적절히 조절 */
+        min-height: 500px;
+      }
 
-      .qr-image-box { width: 150px; height: 150px; }
-      .qr-badge { padding: 10px 20px; }
-      .qr-badge-text { font-size: 16px; }
-      .qr-badge-highlight { font-size: 18px; }
+      .item-moon { 
+        width: 60px; 
+        height: 60px; 
+        top: 4%;
+        left: 4%;
+      }
+      
+      /* 모바일 요소 위치 정밀 고정 */
+      .item-tree { 
+        width: 220px; 
+        left: -10px; 
+        bottom: 12%; 
+      }
+      .item-lantern { 
+        width: 42px; 
+        left: 40px; 
+        top: 45%; 
+      }
+
+      .item-swing { 
+        width: 170px; 
+        right: 2%; 
+        top: 0;
+        height: 68%; 
+      }
+      .item-character { 
+        width: 135px; 
+        right: 4%; 
+        bottom: 22%; 
+      }
+      .item-bag { 
+        width: 50px; 
+        right: 24%; 
+        bottom: 34%; 
+      }
+
+      .cloud-layer { 
+        height: 18%; 
+      }
+
+      /* 카드 및 하단 영역 모바일 반응형 */
+      .cards-container { 
+        flex-direction: column; 
+        gap: 50px; 
+        margin-top: 30px; 
+      }
+      .card { 
+        width: 100%; 
+        max-width: 320px; 
+        min-height: 300px; 
+        padding: 40px 15px 30px;
+      }
+      .card-text {
+        font-size: 22px;
+        margin-top: 50px;
+      }
+
+      .qr-image-box { width: 140px; height: 140px; }
+      .qr-badge { padding: 10px 18px; }
+      .qr-badge-text { font-size: 15px; }
+      .qr-badge-highlight { font-size: 17px; }
     }
   </style>
 </head>
@@ -483,10 +535,10 @@
 
     </div>
 
-    <!-- QR 코드 & 이벤트 혜택 안내 섹션 (중앙 정렬 보정) -->
+    <!-- QR 코드 & 이벤트 혜택 안내 섹션 -->
     <div class="qr-section">
       <!-- 💡 href="https://..." 부분에 이동하고 싶은 사이트 주소를 적어주세요! -->
-      <a href="https://play.google.com/store/apps/details?id=kr.app.drivem.chauffeur&referrer=link_click_id%3D1610924864308273325%26utm_source%3Dapp_share%26utm_campaign%3Duser_referral%26utm_medium%3Dsharing" target="_blank" class="qr-link-wrapper">
+      <a href="https://example.com" target="_blank" class="qr-link-wrapper">
         <div class="qr-card-wrapper">
           <div class="qr-image-box">
             <img src="imagesqr.png" alt="QR 코드" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align:center; padding:20px; color:#888; font-size:14px; font-weight:bold;\'>QR 코드 이미지<br>(imagesqr.png)</div>';">
