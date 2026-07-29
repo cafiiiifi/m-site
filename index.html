@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>엠대리운전</title>
   <style>
     /* 기본 리셋 */
@@ -26,7 +26,6 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      min-height: 600px; /* 모바일에서 너무 찌그러지는 것 방지 */
       background: linear-gradient(180deg, #0b1d3a 0%, #1a3c6d 100%);
       overflow: hidden;
     }
@@ -95,7 +94,7 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* 개별 오브젝트 (PC 기본) */
+    /* 오브젝트 공통 */
     .item {
       position: absolute;
       z-index: 3;
@@ -106,6 +105,7 @@
       object-fit: contain;
     }
 
+    /* [PC 버전 위치 세팅] */
     .item-tree {
       left: 2%;
       bottom: 12%;
@@ -132,18 +132,30 @@
       50% { transform: rotate(5deg); }
     }
 
+    /* 그네 그룹화 컨테이너 */
+    .swing-group-pc {
+      position: absolute;
+      right: 5%;
+      top: 0;
+      width: 320px;
+      height: 80%;
+      z-index: 3;
+    }
+
     .item-swing {
-      right: 12%;
+      position: absolute;
+      right: 0;
       top: 0; 
       width: 280px;
-      height: 75%;
+      height: 80%;
       transform-origin: top center;
       animation: swingMotion 5s infinite ease-in-out;
     }
 
     .item-character {
-      right: 13%;
-      bottom: 27%;
+      position: absolute;
+      right: 10px;
+      bottom: 25%;
       width: 220px;
       height: auto;
       transform-origin: bottom center;
@@ -151,8 +163,9 @@
     }
 
     .item-bag {
-      right: 30%;
-      bottom: 40%;
+      position: absolute;
+      right: 210px;
+      bottom: 38%;
       width: 80px;
       height: auto;
       transform-origin: bottom center;
@@ -178,7 +191,7 @@
       bottom: -1px;
       left: 0;
       width: 100%;
-      height: 25%;
+      height: 22%;
       z-index: 4;
     }
     .cloud-layer img {
@@ -264,7 +277,7 @@
       letter-spacing: 5px;
     }
 
-    /* QR 코드 중앙 정렬 & 클릭 이동 스타일 */
+    /* QR 코드 클릭 및 카드 스타일 */
     .qr-section {
       display: flex;
       flex-direction: column;
@@ -297,7 +310,6 @@
       cursor: pointer;
     }
 
-    /* 빛 반사 애니메이션 */
     .qr-card-wrapper::after {
       content: '';
       position: absolute;
@@ -392,75 +404,81 @@
     }
 
     /* ==========================================
-       [핵심 수정] 모바일 반응형 완벽 보정
+       [스마트폰/모바일 전용 최적화]
        ========================================== */
     @media (max-width: 768px) {
       .hero-section {
-        height: 80vh; /* 모바일에서 밤하늘 비율을 적절히 조절 */
-        min-height: 500px;
+        height: 100vh;
+        max-height: 850px; /* 긴 스마트폰 대응 */
       }
 
       .item-moon { 
-        width: 60px; 
-        height: 60px; 
-        top: 4%;
+        width: 50px; 
+        height: 50px; 
+        top: 3%;
         left: 4%;
       }
       
-      /* 모바일 요소 위치 정밀 고정 */
+      /* 모바일용 위치 완전 고정 세팅 */
       .item-tree { 
-        width: 220px; 
-        left: -10px; 
-        bottom: 12%; 
+        width: 180px; 
+        left: -15px; 
+        bottom: 8%; 
       }
       .item-lantern { 
-        width: 42px; 
-        left: 40px; 
-        top: 45%; 
+        width: 35px; 
+        left: 20px; 
+        top: 50%; 
       }
 
-      .item-swing { 
-        width: 170px; 
-        right: 2%; 
+      /* 모바일용 그네 세트 */
+      .swing-group-pc {
+        right: -10px;
         top: 0;
-        height: 68%; 
+        width: 220px;
+        height: 75%;
+      }
+      .item-swing { 
+        width: 190px; 
+        right: 0; 
+        height: 75%; 
       }
       .item-character { 
-        width: 135px; 
-        right: 4%; 
-        bottom: 22%; 
+        width: 140px; 
+        right: 5px; 
+        bottom: 18%; 
       }
       .item-bag { 
         width: 50px; 
-        right: 24%; 
-        bottom: 34%; 
+        right: 140px; 
+        bottom: 28%; 
       }
 
       .cloud-layer { 
-        height: 18%; 
+        height: 16%; 
       }
 
-      /* 카드 및 하단 영역 모바일 반응형 */
+      /* 카드 세로 배열 */
       .cards-container { 
         flex-direction: column; 
-        gap: 50px; 
-        margin-top: 30px; 
+        gap: 45px; 
+        margin-top: 20px; 
       }
       .card { 
         width: 100%; 
-        max-width: 320px; 
-        min-height: 300px; 
-        padding: 40px 15px 30px;
+        max-width: 290px; 
+        min-height: 260px; 
+        padding: 35px 15px 25px;
       }
       .card-text {
-        font-size: 22px;
-        margin-top: 50px;
+        font-size: 20px;
+        margin-top: 40px;
       }
 
       .qr-image-box { width: 140px; height: 140px; }
-      .qr-badge { padding: 10px 18px; }
-      .qr-badge-text { font-size: 15px; }
-      .qr-badge-highlight { font-size: 17px; }
+      .qr-badge { padding: 10px 16px; }
+      .qr-badge-text { font-size: 14px; }
+      .qr-badge-highlight { font-size: 16px; }
     }
   </style>
 </head>
@@ -474,24 +492,25 @@
       <img src="imagesmoon.png" alt="달" onerror="this.style.display='none'; parentNode.style.background='radial-gradient(circle, #fffbe0 0%, rgba(255,255,255,0) 70%)'; parentNode.style.borderRadius='50%';">
     </div>
 
+    <!-- 나무 & 전등 -->
     <div class="item item-tree">
       <img src="imagestree.png" alt="나무">
     </div>
-
     <div class="item item-lantern">
       <img src="imageslantern.png" alt="전등">
     </div>
 
-    <div class="item item-swing">
-      <img src="imagesswing.png" alt="그네">
-    </div>
-
-    <div class="item item-character">
-      <img src="imagescharacter.png" alt="책 읽는 캐릭터">
-    </div>
-
-    <div class="item item-bag">
-      <img src="imagesbag.png" alt="가방">
+    <!-- [핵심] 그네, 캐릭터, 가방을 하나의 고정 묶음으로 처리 -->
+    <div class="swing-group-pc">
+      <div class="item-swing">
+        <img src="imagesswing.png" alt="그네">
+      </div>
+      <div class="item-character">
+        <img src="imagescharacter.png" alt="책 읽는 캐릭터">
+      </div>
+      <div class="item-bag">
+        <img src="imagesbag.png" alt="가방">
+      </div>
     </div>
 
     <div class="cloud-layer">
@@ -535,9 +554,9 @@
 
     </div>
 
-    <!-- QR 코드 & 이벤트 혜택 안내 섹션 -->
+    <!-- QR 코드 섹션 -->
     <div class="qr-section">
-      <!-- 💡 href="https://..." 부분에 이동하고 싶은 사이트 주소를 적어주세요! -->
+      <!-- 💡 href="https://..." 부분에 이동할 URL을 입력하세요 -->
       <a href="https://example.com" target="_blank" class="qr-link-wrapper">
         <div class="qr-card-wrapper">
           <div class="qr-image-box">
