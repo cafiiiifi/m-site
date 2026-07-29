@@ -31,13 +31,12 @@
       overflow: hidden;
     }
 
-    /* [핵심] 가로세로 비율을 고정하는 무대 (Stage)
-       1000px * 700px 기준으로 내부 레이아웃 비율 완벽 보정 */
+    /* 가로세로 비율 고정 무대 */
     .hero-stage {
       position: relative;
       width: 100%;
       max-width: 1200px;
-      aspect-ratio: 1000 / 700; /* PC/기본 비율 고정 */
+      aspect-ratio: 1000 / 700;
       overflow: hidden;
     }
 
@@ -69,7 +68,7 @@
       position: absolute;
       top: 6%;
       left: 6%;
-      width: 9%;
+      width: 8%;
       aspect-ratio: 1 / 1;
       z-index: 2;
       opacity: 0.9;
@@ -77,7 +76,7 @@
     }
     .item-moon img { width: 100%; height: 100%; object-fit: contain; }
 
-    /* 반짝이는 별 컨테이너 */
+    /* 별 컨테이너 */
     .stars-container {
       position: absolute;
       top: 0;
@@ -101,7 +100,7 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* 오브젝트 공통 스타일 (% 기반 고정) */
+    /* 오브젝트 공통 스타일 */
     .stage-item {
       position: absolute;
       z-index: 3;
@@ -117,7 +116,7 @@
     .item-tree {
       left: 1%;
       bottom: 12%;
-      width: 38%;
+      width: 35%;
       transform-origin: bottom center;
       animation: swayTree 8s infinite ease-in-out;
     }
@@ -126,11 +125,11 @@
       50% { transform: rotate(1deg); }
     }
 
-    /* 2. 전등 (나무에 정확히 귀속) */
+    /* 2. 전등 */
     .item-lantern {
-      left: 10.5%;
+      left: 9.8%;
       top: 48%;
-      width: 6.5%;
+      width: 6%;
       transform-origin: top center;
       animation: swingLantern 3.5s infinite ease-in-out;
     }
@@ -139,13 +138,13 @@
       50% { transform: rotate(5deg); }
     }
 
-    /* 3. 우측 세트: 그네 + 캐릭터 + 가방 (통째로 묶어서 비율 고정) */
+    /* 3. [수정됨] 우측 세트 크기축소 (32% -> 24%) */
     .swing-group-stage {
       position: absolute;
-      right: 4%;
+      right: 6%;
       top: 0;
-      width: 32%;
-      height: 85%;
+      width: 24%; /* 크기를 아담하게 줄였습니다! */
+      height: 80%;
       z-index: 3;
     }
 
@@ -153,7 +152,7 @@
       position: absolute;
       right: 0;
       top: 0;
-      width: 88%;
+      width: 85%;
       height: 100%;
       transform-origin: top center;
       animation: swingMotion 5s infinite ease-in-out;
@@ -161,18 +160,18 @@
 
     .item-character {
       position: absolute;
-      right: 2%;
+      right: 5%;
       bottom: 18%;
-      width: 68%;
+      width: 70%;
       transform-origin: bottom center;
       animation: characterBounce 5s infinite ease-in-out;
     }
 
     .item-bag {
       position: absolute;
-      left: 0;
+      left: -10%;
       bottom: 30%;
-      width: 25%;
+      width: 26%;
       transform-origin: bottom center;
       animation: bagBounce 5s infinite ease-in-out;
     }
@@ -407,13 +406,16 @@
       letter-spacing: -1px;
     }
 
-    /* ==========================================
-       [모바일 세로 전용 비율 조정]
-       ========================================== */
+    /* 모바일 세로 전용 */
     @media (max-width: 768px) {
-      /* 스마트폰에서는 무대를 살짝 더 세로감 있게 1000/900으로 전환 */
       .hero-stage {
-        aspect-ratio: 1000 / 900;
+        aspect-ratio: 1000 / 850;
+      }
+
+      /* 모바일에서 그네 세트 너비 적절히 고정 */
+      .swing-group-stage {
+        width: 28%;
+        right: 4%;
       }
 
       .cards-container { 
@@ -441,7 +443,7 @@
 </head>
 <body>
 
-  <!-- 히어로 섹션 (고정 비율 무대 방식) -->
+  <!-- 히어로 섹션 -->
   <section class="hero-container">
     <div class="hero-stage">
       <div class="stars-container" id="starsContainer"></div>
@@ -450,7 +452,7 @@
         <img src="imagesmoon.png" alt="달" onerror="this.style.display='none'; parentNode.style.background='radial-gradient(circle, #fffbe0 0%, rgba(255,255,255,0) 70%)'; parentNode.style.borderRadius='50%';">
       </div>
 
-      <!-- 좌측: 나무 & 전등 세트 -->
+      <!-- 좌측: 나무 & 전등 -->
       <div class="stage-item item-tree">
         <img src="imagestree.png" alt="나무">
       </div>
@@ -458,7 +460,7 @@
         <img src="imageslantern.png" alt="전등">
       </div>
 
-      <!-- 우측: 그네, 캐릭터, 가방 통째로 비율 고정 -->
+      <!-- 우측: 그네, 캐릭터, 가방 (축소 조정 완료) -->
       <div class="swing-group-stage">
         <div class="item-swing">
           <img src="imagesswing.png" alt="그네">
@@ -515,7 +517,6 @@
 
     <!-- QR 코드 영역 -->
     <div class="qr-section">
-      <!-- 💡 href="https://..." 부분에 이동할 URL 주소를 넣으세요 -->
       <a href="https://example.com" target="_blank" class="qr-link-wrapper">
         <div class="qr-card-wrapper">
           <div class="qr-image-box">
